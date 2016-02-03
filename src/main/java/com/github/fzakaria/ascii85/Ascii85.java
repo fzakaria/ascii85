@@ -1,7 +1,5 @@
 package com.github.fzakaria.ascii85;
 
-import java.io.FilterInputStream;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -34,7 +32,7 @@ public class Ascii85 {
             throw new IllegalArgumentException("You must provide a non-zero length input");
         }
         //By using five ASCII characters to represent four bytes of binary data the encoded size ¹⁄₄ is larger than the original
-        StringBuffer stringBuff = new StringBuffer(payload.length * 5/4);
+        StringBuilder stringBuff = new StringBuilder(payload.length * 5/4);
         //We break the payload into int (4 bytes)
         byte[] chunk = new byte[4];
         int chunkIndex = 0;
@@ -53,7 +51,7 @@ public class Ascii85 {
                 }
                 Arrays.fill(chunk, (byte) 0);
                 chunkIndex = 0;
-            };
+            }
         }
 
         //If we didn't end on 0, then we need some padding
@@ -119,7 +117,7 @@ public class Ascii85 {
                 bytebuff.put(decodeChunk(chunk));
                 Arrays.fill(chunk, (byte) 0);
                 chunkIndex = 0;
-            };
+            }
         }
 
         //If we didn't end on 0, then we need some padding
