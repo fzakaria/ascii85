@@ -27,7 +27,7 @@ public class Ascii85 {
     private Ascii85() {
     }
 
-    static String encode(byte[] payload) {
+    public static String encode(byte[] payload) {
         if (payload == null || payload.length == 0) {
             throw new IllegalArgumentException("You must provide a non-zero length input");
         }
@@ -84,7 +84,7 @@ public class Ascii85 {
      * @param chars The input characters that are base85 encoded.
      * @return The binary data decoded from the input
      */
-    static byte[] decode(String chars) {
+    public static byte[] decode(String chars) {
         if (chars == null || chars.length() == 0) {
             throw new IllegalArgumentException("You must provide a non-zero length input");
         }
