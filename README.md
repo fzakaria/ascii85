@@ -1,5 +1,15 @@
 #Ascii85
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.fzakaria/ascii85.svg)]()
+
+```
+<dependency>
+  <groupId>com.github.fzakaria</groupId>
+  <artifactId>ascii85</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
 This is a very simple project with a Ascii85/Base85 codec (decoder & encoder). The version most similar to what is
 implemented is the **Adobe Version**. 
 
