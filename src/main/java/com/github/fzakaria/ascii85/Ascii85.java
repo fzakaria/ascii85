@@ -1,5 +1,6 @@
 package com.github.fzakaria.ascii85;
 
+import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -89,7 +90,9 @@ public class Ascii85 {
             throw new IllegalArgumentException("You must provide a non-zero length input");
         }
         //By using five ASCII characters to represent four bytes of binary data the encoded size ¹⁄₄ is larger than the original
-        ByteBuffer bytebuff = ByteBuffer.allocate( (chars.length() * 4/5) );
+        BigDecimal decodedLength = BigDecimal.valueOf(chars.length()).multiply(BigDecimal.valueOf(4))
+                .divide(BigDecimal.valueOf(5));
+        ByteBuffer bytebuff = ByteBuffer.allocate(decodedLength.intValue());
         //1. Whitespace characters may occur anywhere to accommodate line length limitations. So lets strip it.
         chars = REMOVE_WHITESPACE.matcher(chars).replaceAll("");
         //Since Base85 is an ascii encoder, we don't need to get the bytes as UTF-8.

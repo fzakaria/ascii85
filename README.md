@@ -14,7 +14,7 @@ In Ascii85-encoded blocks, whitespace and line-break characters may be present a
 >assuming eight bits per ASCII character), it is more efficient than uuencode or Base64, which use four characters
 >to represent three bytes of data (¹⁄₃ increase, assuming eight bits per ASCII character).
 
-https://en.wikipedia.org/wiki/Ascii85
+[Ascii85](https://en.wikipedia.org/wiki/Ascii85)
 
 There are some included test cases that use the example given in the wiki link above.
 

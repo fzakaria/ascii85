@@ -1,5 +1,6 @@
 package com.github.fzakaria.ascii85;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -32,7 +33,7 @@ public class Ascii85Test {
     }
 
     @Test
-         public void basicWikiDecodeNewLinesTest() {
+    public void basicWikiDecodeNewLinesTest() {
         String encodedString = "9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!,\n" +
                 "O<DJ+*.@<*K0@<6L(Df-\\0Ec5e;DffZ(EZee.Bl.9pF\"AGXBPCsi+DGm>@3BB/F*&OCAfu2/AKY\n" +
                 "i(DIb:@FD,*)+C]U=@3BN#EcYf8ATD3s@q?d$AftVqCh[NqF<G:8+EV:.+Cf>-FD5W8ARlolDIa\n" +
@@ -71,6 +72,23 @@ public class Ascii85Test {
                 "which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation "+
                 "of knowledge, exceeds the short vehemence of any carnal pleasure.";
         assertThat(solution, is(Ascii85.encode(decodedString.getBytes())));
+    }
+
+    /**
+     * This test is ignored at the moment, because it requires setting the heap space quite large.
+     * Which is something I don't want to make default.
+     * It is a good stress test nonetheless
+     */
+    @Ignore
+    @Test
+    public void overflowTest() {
+        final int N = 0x23C34567;
+        final StringBuilder sb = new StringBuilder(N);
+        for (int i = 0; i < N; ++i) {
+            sb.append("-");
+        }
+        final String encodedString = sb.toString();
+        assertNotNull(Ascii85.decode(encodedString));
     }
 
 }
