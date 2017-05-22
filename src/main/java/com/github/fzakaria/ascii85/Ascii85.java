@@ -70,10 +70,12 @@ public class Ascii85 {
     }
 
     private static char[] encodeChunk(int value) {
+        //transform value to unsigned long
+        long longValue = value & 0x00000000ffffffffL;
         char[] encodedChunk = new char[5];
         for(int i = 0 ; i < encodedChunk.length; i++) {
-            encodedChunk[i] = (char) ((value / BASE85_POW[4 - i]) + ASCII_SHIFT);
-            value = value % BASE85_POW[4 - i];
+            encodedChunk[i] = (char) ((longValue / BASE85_POW[4 - i]) + ASCII_SHIFT);
+            longValue = longValue % BASE85_POW[4 - i];
         }
         return encodedChunk;
     }

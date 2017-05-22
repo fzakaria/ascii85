@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -72,6 +73,19 @@ public class Ascii85Test {
                 "which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation "+
                 "of knowledge, exceeds the short vehemence of any carnal pleasure.";
         assertThat(solution, is(Ascii85.encode(decodedString.getBytes())));
+    }
+
+    //https://github.com/fzakaria/ascii85/issues/2
+    @Test
+    public void testNegativeBytes() {
+        byte[] randoms = new byte[] {-127, -127, -127, -127};
+        String encoded = Ascii85.encode(randoms);
+        try {
+            byte[] actual = Ascii85.decode(encoded);
+            assertThat(actual, is(randoms));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
