@@ -2,7 +2,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.fzakaria/ascii85.svg)]()
 
-```
+```xml
 <dependency>
   <groupId>com.github.fzakaria</groupId>
   <artifactId>ascii85</artifactId>
@@ -28,7 +28,7 @@ In Ascii85-encoded blocks, whitespace and line-break characters may be present a
 
 There are some included test cases that use the example given in the wiki link above.
 
-```
+```java
     @Test
     public void basicWikiDecodeTest() {
         String encodedString = "9jqo^BlbD-BleB1DJ+*+F(f,q/0JhKF<GL>Cj@.4Gp$d7F!,L7@<6@)/0JDEF<G%<+EV:2F!," +
