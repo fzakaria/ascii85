@@ -11,12 +11,13 @@
     <description>Provides methods for encoding bytes to and decoding strings from the Ascii85 format.</description>
     <url>https://github.com/fzakaria/ascii85</url>
 
-    <licenses>
-        <license>
-            <name>Eclipse Public License, Version 1.0</name>
-            <url>http://www.eclipse.org/org/documents/epl-v10.html</url>
-        </license>
-    </licenses>
+   <licenses>
+     <license>
+       <name>Apache License, Version 2.0</name>
+       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+       <distribution>repo</distribution>
+     </license>
+   </licenses>
 
     <developers>
         <developer>
