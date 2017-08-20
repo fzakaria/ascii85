@@ -6,7 +6,7 @@
 <dependency>
   <groupId>com.github.fzakaria</groupId>
   <artifactId>ascii85</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
 </dependency>
 ```
 
@@ -43,9 +43,3 @@ There are some included test cases that use the example given in the wiki link a
         assertThat(solution, is(new String(Ascii85.decode(encodedString), StandardCharsets.US_ASCII)));
     }
 ```
-
-#License
-
-Copyright © 2016 Farid Zakaria
-
-Distributed under the Eclipse Public License
