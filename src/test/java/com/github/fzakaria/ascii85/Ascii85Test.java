@@ -105,4 +105,25 @@ public class Ascii85Test {
         assertNotNull(Ascii85.decode(encodedString));
     }
 
+    @Test
+    public void testZeroStringDecodes() {
+        testZeroStringDecode(530);
+        testZeroStringDecode(531);
+        testZeroStringDecode(532);
+        testZeroStringDecode(533);
+        testZeroStringDecode(534);
+    }
+
+    public void testZeroStringDecode(int length) {
+        byte[] data = new byte[length];
+        for (int c = 0; c < length; c++) data[c] = 0;
+        try {
+            String encoded = Ascii85.encode(data);
+            byte[] decoded = Ascii85.decode(encoded);
+            assertEquals(length, decoded.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+            assert(false);
+        }
+    }
 }
