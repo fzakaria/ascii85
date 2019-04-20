@@ -29,8 +29,8 @@ public class Ascii85 {
     }
 
     public static String encode(byte[] payload) {
-        if (payload == null || payload.length == 0) {
-            throw new IllegalArgumentException("You must provide a non-zero length input");
+        if (payload == null) {
+            throw new IllegalArgumentException("You must provide a non-null input");
         }
         //By using five ASCII characters to represent four bytes of binary data the encoded size ¹⁄₄ is larger than the original
         StringBuilder stringBuff = new StringBuilder(payload.length * 5/4);
@@ -88,8 +88,8 @@ public class Ascii85 {
      * @return The binary data decoded from the input
      */
     public static byte[] decode(String chars) {
-        if (chars == null || chars.length() == 0) {
-            throw new IllegalArgumentException("You must provide a non-zero length input");
+        if (chars == null) {
+            throw new IllegalArgumentException("You must provide a non-null input");
         }
         //By using five ASCII characters to represent four bytes of binary data the encoded size ¹⁄₄ is larger than the original
         BigDecimal decodedLength = BigDecimal.valueOf(chars.length()).multiply(BigDecimal.valueOf(4))

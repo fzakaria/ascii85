@@ -88,6 +88,15 @@ public class Ascii85Test {
         }
     }
 
+    @Test
+    public void testEmpty() {
+        byte[] empty = new byte[0];
+        String encoded = Ascii85.encode(empty);
+        assertThat(encoded, is(""));
+        byte[] decoded = Ascii85.decode(encoded);
+        assertThat(decoded, is(empty));
+    }
+
     /**
      * This test is ignored at the moment, because it requires setting the heap space quite large.
      * Which is something I don't want to make default.
