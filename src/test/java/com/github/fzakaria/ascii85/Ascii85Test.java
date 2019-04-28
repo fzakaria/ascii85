@@ -78,14 +78,10 @@ public class Ascii85Test {
     //https://github.com/fzakaria/ascii85/issues/2
     @Test
     public void testNegativeBytes() {
-        byte[] randoms = new byte[] {-127, -127, -127, -127};
+        byte[] randoms = new byte[]{-127, -127, -127, -127};
         String encoded = Ascii85.encode(randoms);
-        try {
-            byte[] actual = Ascii85.decode(encoded);
-            assertThat(actual, is(randoms));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        byte[] actual = Ascii85.decode(encoded);
+        assertArrayEquals(randoms, actual);
     }
 
     @Test
@@ -94,7 +90,7 @@ public class Ascii85Test {
         String encoded = Ascii85.encode(empty);
         assertThat(encoded, is(""));
         byte[] decoded = Ascii85.decode(encoded);
-        assertThat(decoded, is(empty));
+        assertArrayEquals(empty, decoded);
     }
 
     /**
@@ -122,17 +118,12 @@ public class Ascii85Test {
         testZeroStringDecode(533);
         testZeroStringDecode(534);
     }
-
+    
     public void testZeroStringDecode(int length) {
         byte[] data = new byte[length];
         for (int c = 0; c < length; c++) data[c] = 0;
-        try {
-            String encoded = Ascii85.encode(data);
-            byte[] decoded = Ascii85.decode(encoded);
-            assertEquals(length, decoded.length);
-        } catch (Exception e) {
-            e.printStackTrace();
-            assert(false);
-        }
+        String encoded = Ascii85.encode(data);
+        byte[] decoded = Ascii85.decode(encoded);
+        assertArrayEquals(data, decoded);
     }
 }
