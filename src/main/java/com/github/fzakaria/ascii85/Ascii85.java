@@ -95,16 +95,11 @@ public class Ascii85 {
         // to scan through the input to compute the target length, instead of just subtracting 20% of
         // the encoded text length.
         final int inputLength = chars.length();
-        int computedLength = 0;
-        for (int idx = 0; idx < inputLength; ++idx) {
-            if (chars.charAt(idx) != 'z') {
-                for (int c = 0; c < 5 && idx < inputLength; ++idx, ++c) {
-                    if (c > 0) ++computedLength;
-                }
-                --idx;
-            }
-            else computedLength += 4;
+        int zCount = 0;
+        for(int i = 0 ; i < inputLength; i++) {
+            if(chars.charAt(i) == 'z') ++ zCount;
         }
+        int computedLength = 4 * zCount + 4 * (inputLength - zCount) / 5;
         ByteBuffer bytebuff = ByteBuffer.allocate(computedLength);
         //1. Whitespace characters may occur anywhere to accommodate line length limitations. So lets strip it.
         chars = REMOVE_WHITESPACE.matcher(chars).replaceAll("");
