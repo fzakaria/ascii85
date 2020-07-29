@@ -95,12 +95,22 @@ public class Ascii85 {
         // to scan through the input to compute the target length, instead of just subtracting 20% of
         // the encoded text length.
         final int inputLength = chars.length();
-        int zCount = 0;
-        for(int i = 0 ; i < inputLength; i++) {
-            if(chars.charAt(i) == 'z') ++ zCount;
-        }
-        int computedLength = 4 * zCount + 4 * (inputLength - zCount) / 5;
-        ByteBuffer bytebuff = ByteBuffer.allocate(computedLength);
+
+        // lets first count the occurrences of 'z'
+        long zCount = chars.chars().filter(c -> c == 'z').count();
+
+        // Typically by using five ASCII characters to represent four bytes of binary data
+        // the encoded size ¹⁄₄ is larger than the original.
+        // We however have to account for the 'z' which were compressed
+        BigDecimal uncompressedZLength = BigDecimal.valueOf(zCount).multiply(BigDecimal.valueOf(4));
+
+        BigDecimal uncompressedNonZLength = BigDecimal.valueOf(inputLength - zCount)
+                .multiply(BigDecimal.valueOf(4))
+                .divide(BigDecimal.valueOf(5));
+
+        BigDecimal uncompressedLength = uncompressedZLength.add(uncompressedNonZLength);
+
+        ByteBuffer bytebuff = ByteBuffer.allocate(uncompressedLength.intValue());
         //1. Whitespace characters may occur anywhere to accommodate line length limitations. So lets strip it.
         chars = REMOVE_WHITESPACE.matcher(chars).replaceAll("");
         //Since Base85 is an ascii encoder, we don't need to get the bytes as UTF-8.
