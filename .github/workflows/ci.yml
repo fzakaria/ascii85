@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Compile
+      run: |
+        mvn clean
+        mvn compile
+    - name: Compile the unit tests
+      run: mvn test-compile
+    - name: Run the unit tests
+      run: mvn test
+    - name: Package artifact
+      run: mvn package
+    - uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: target
