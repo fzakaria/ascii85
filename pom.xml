@@ -4,7 +4,7 @@
 
     <groupId>com.github.fzakaria</groupId>
     <artifactId>ascii85</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>Ascii85 Codec</name>
@@ -47,7 +47,7 @@
         <connection>scm:git:git@github.com:fzakaria/ascii85.git</connection>
         <developerConnection>scm:git:git@github.com:fzakaria/ascii85.git</developerConnection>
         <url>https://github.com/fzakaria/ascii85</url>
-      <tag>ascii85-1.0</tag>
+      <tag>ascii85-1.2</tag>
   </scm>
 
     <properties>
